@@ -12,7 +12,7 @@ You can install the released version of DataPushR from [CRAN](https://CRAN.R-pro
 
 ``` r
 install.packages("pacman")
-pacman::p_load_gh("byuidatascience/DataPushR")
+pacman::p_load_gh("byuidss/DataPushR")
 ```
 
 ## Example

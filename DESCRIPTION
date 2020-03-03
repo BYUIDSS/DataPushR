@@ -1,0 +1,21 @@
+Package: DataPushR
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "J.",
+           family = "Hathway",
+           role = c("aut", "cre"),
+           email = "hathwayj@byui.edu",
+           comment = c(ORCID = "https://byuistats.github.io/M335/visitme.html"))
+Description: What the package does (one paragraph).
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.0
+Imports: 
+    tibble,
+    haven,
+    readr,
+    fs,
+    writexl,
+    jsonlite

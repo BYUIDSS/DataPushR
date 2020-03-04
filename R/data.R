@@ -1,7 +1,7 @@
 
 #' Vietnam Draft Numbers
 #'
-#' @source I can't remember. Of note is that the 1969 draft was not random.
+#' @source https://www.randomservices.org/random/data/Draft.html
 #' @description This data can be used to teach correlation.
 #' @format A data frame with columns:
 #' \describe{

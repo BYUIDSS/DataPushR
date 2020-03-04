@@ -16,7 +16,7 @@
  \item{n72}{1972 draft order}
 }}
 \source{
-I can't remember. Of note is that the 1969 draft was not random.
+https://www.randomservices.org/random/data/Draft.html
 }
 \usage{
 dat_draft

@@ -2,6 +2,7 @@
 #' Vietnam Draft Numbers
 #'
 #' @source I can't remember. Of note is that the 1969 draft was not random.
+#' @description This data can be used to teach correlation.
 #' @format A data frame with columns:
 #' \describe{
 #'  \item{day_month}{A value between 1924 and 2015.}

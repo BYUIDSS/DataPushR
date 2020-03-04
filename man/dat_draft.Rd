@@ -22,7 +22,7 @@ I can't remember. Of note is that the 1969 draft was not random.
 dat_draft
 }
 \description{
-Vietnam Draft Numbers
+This data can be used to teach correlation.
 }
 \examples{
 \dontrun{

@@ -12,7 +12,7 @@
 #'	export_folder=getwd())
 #'	dpr_export(dd, export_format=c(".rds",".xlsx",".sav",".dta",".csv", ".json", ".sas7bdat"), export_folder=getwd())
 #'	@export
-dpr_export  = function(object, export_format = NULL, export_folder, details = TRUE, readme = NULL) {
+dpr_export  <-  function(object, export_format = NULL, export_folder, details = TRUE, readme = NULL) {
 
 
   # user needs to specify the export formats

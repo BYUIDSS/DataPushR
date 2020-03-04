@@ -18,4 +18,10 @@ Imports:
     readr,
     fs,
     writexl,
-    jsonlite
+    jsonlite,
+    dplyr,
+    tidyr,
+    glue,
+    purrr,
+    knitr,
+    stringr

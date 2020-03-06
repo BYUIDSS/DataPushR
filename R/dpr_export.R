@@ -12,24 +12,24 @@
 #'	export_folder=getwd())
 #'	dpr_export(dd, export_format=c(".rds",".xlsx",".sav",".dta",".csv", ".json", ".sas7bdat"), export_folder=getwd())
 #'	@export
-dpr_export  <-  function(object, export_format = NULL, export_folder, details = TRUE, readme = NULL) {
+dpr_export  <-  function(object = NULL, export_format = NULL, export_folder, details = TRUE, readme = NULL) {
 
 
   # user needs to specify the export formats
   if (is.null(export_format))  stop("Don't you want to export something....")
 
-  file_name <- fs::path_file(csv_file) %>% fs::path_ext_remove()
-
-  # To remove tempfile stuff if needed. Could remove
-  file_name <- gsub("_-_(\\d|\\w){1,250}.", ".", file_name)
-
-
   # read in the file
   if (is.character(object)) {
+
+    file_name <- fs::path_file(object) %>% fs::path_ext_remove()
+    # To remove tempfile stuff if needed. Could remove
+    file_name <- gsub("_-_(\\d|\\w){1,250}.", ".", file_name)
+
     temp_data <- readr::read_csv(object)
     # change periods to underscores and then move to lowercase in column names
     colnames(temp_data) <- gsub("\\.", "_", tolower(colnames(temp_data)))
   } else {
+    file_name <-deparse(substitute(object))
     temp_data <- object
   }
 

@@ -24,4 +24,6 @@ Imports:
     glue,
     purrr,
     knitr,
-    stringr
+    stringr,
+    devtools,
+    roxygen2

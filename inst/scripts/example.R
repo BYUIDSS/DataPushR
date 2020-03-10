@@ -48,7 +48,6 @@ dpr_document(iris, extension = ".md", export_folder = fs::path(usethis::proj_get
 
 dpr_readme(usethis::proj_get(), "Test2", "hathawayj")
 
-
 dpr_push(folder_dir = usethis::proj_get(), message = "'Second Push from Hathaway'", repo_url = NULL)
 
 dpr_delete_github(owner_name = "hathawayj", repo_name = "Test2")

@@ -143,7 +143,7 @@ dpr_create_github <- function(package_name, post_text = c("/orgs/ORGNAME/repos",
 #' @param package_name is the name of the created data R package.
 #' @param github_user is the Github group or user where the package is stored.
 #' @export
-dpr_delete_github <- function(package_name, owner_name, repo_name) {
+dpr_delete_github <- function(owner_name, repo_name) {
   delete_gh <- gh::gh("DELETE /repos/:owner/:repo", owner = owner_name, repo = repo_name)
   delete_gh
 }

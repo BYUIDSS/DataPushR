@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • DataPushR</title>
+<title>Github Repo Create — dpr_create_github • DataPushR</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Github Repo Create — dpr_create_github" />
+<meta property="og:description" content="Github Repo Create" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -96,85 +98,48 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Github Repo Create</h1>
+    
+    <div class="hidden name"><code>dpr_create_github.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Github Repo Create</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>dpr_create_github</span>(
+  <span class='no'>package_name</span>,
+  <span class='kw'>post_text</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"/orgs/ORGNAME/repos"</span>, <span class='st'>"/user/repos"</span>)[<span class='fl'>2</span>],
+  <span class='kw'>public</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="dat_draft.html">dat_draft</a></code> </p>
-        </td>
-        <td><p>Vietnam Draft Numbers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dpr_create_github.html">dpr_create_github()</a></code> </p>
-        </td>
-        <td><p>Github Repo Create</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dpr_create_package.html">dpr_create_package()</a></code> </p>
-        </td>
-        <td><p>Create an R package for data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dpr_delete_github.html">dpr_delete_github()</a></code> </p>
-        </td>
-        <td><p>Github Repo Delete</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dpr_document.html">dpr_document()</a></code> </p>
-        </td>
-        <td><p>Build data documentation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dpr_export.html">dpr_export()</a></code> </p>
-        </td>
-        <td><p>Export csv files to other file formats as defined
-	@param object is a character string of the csv file (with its path) or an R data.frame.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dpr_push.html">dpr_push()</a></code> </p>
-        </td>
-        <td><p>Connect to remote, Commit and Push Latest Updates to Repo</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dpr_readme.html">dpr_readme()</a></code> </p>
-        </td>
-        <td><p>Create readme.md in repo</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>package_name</th>
+      <td><p>is the name of the created data R package.</p></td>
+    </tr>
+    <tr>
+      <th>folder_dir</th>
+      <td><p>is the folder on your local computer where you store your git repository</p></td>
+    </tr>
+    <tr>
+      <th>github_user</th>
+      <td><p>is the Github group or user where the package is stored.</p></td>
+    </tr>
     </table>
-  </div>
 
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
+
   </div>
 </div>
 

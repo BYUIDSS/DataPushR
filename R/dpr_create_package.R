@@ -126,4 +126,30 @@ pacman::p_load_gh('--github--')
 }
 
 
+#' @title Github Repo Create
+#' @param folder_dir is the folder on your local computer where you store your git repository
+#' @param package_name is the name of the created data R package.
+#' @param github_user is the Github group or user where the package is stored.
+#' @export
+dpr_create_github <- function(package_name, post_text = c("/orgs/ORGNAME/repos", "/user/repos")[2], public = TRUE) {
+  create_gh <- gh::gh(glue::glue("POST {post}",post = post_text), name = package_name,
+                      private = !public, has_wiki = FALSE, auto_init = FALSE)
+  create_gh
+}
 
+
+#' @title Github Repo Delete
+#' @param folder_dir is the folder on your local computer where you store your git repository
+#' @param package_name is the name of the created data R package.
+#' @param github_user is the Github group or user where the package is stored.
+#' @export
+dpr_delete_github <- function(package_name, owner_name, repo_name) {
+  delete_gh <- gh::gh("DELETE /repos/:owner/:repo", owner = owner_name, repo = repo_name)
+  delete_gh
+}
+
+#' @title Write data R script
+#' @param folder_dir is the folder on your local computer where you store your git repository
+#' @param package_name is the name of the created data R package.
+#' @param github_user is the Github group or user where the package is stored.
+#' @export

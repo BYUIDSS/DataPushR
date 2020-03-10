@@ -6,6 +6,8 @@ devtools::load_all()
 
 base_folder <- "../../temp_data"
 
+github_info <- dpr_create_github("Test2")
+
 dat_draft <- read_csv(system.file("extdata", "Draft_vietnam.csv", package = "DataPushR"))
 
 dd_descriptions <- list(day_month = "Day of the month", day_year = "Day of the year (1-365)", month = "1-12 for the numeric order of months", month_name = "The english name of the month", n69 = "1969 draft order. 1-366", n70 = "1970 draft order. 1-366", n71 = "1969 draft order. 1-366", n72 = "1972 draft order. 1-366")
@@ -48,3 +50,5 @@ dpr_readme(usethis::proj_get(), "Test2", "hathawayj")
 
 
 dpr_push(folder_dir = usethis::proj_get(), message = "'Second Push from Hathaway'", repo_url = NULL)
+
+dpr_delete_github(owner_name = "hathawayj", repo_name = "Test2")

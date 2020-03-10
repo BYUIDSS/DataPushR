@@ -6,7 +6,7 @@
 	@param object is a character string of the csv file (with its path) or an R data.frame.}
 \usage{
 dpr_export(
-  object,
+  object = NULL,
   export_format = NULL,
   export_folder,
   details = TRUE,

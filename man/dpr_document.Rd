@@ -53,7 +53,7 @@ dd <- read_csv(system.file("extdata", "Draft_vietnam.csv", package = "DataPushR"
 dd_descriptions <- list(day_month = "Day of the month", day_year = "Day of the year (1-365)", month = "1-12 for the numeric order of months", month_name = "The english name of the month", n69 = "1969 draft order. 1-366", n70 = "1970 draft order. 1-366", n71 = "1969 draft order. 1-366", n72 = "1972 draft order. 1-366")
 dpr_document(dd, extension = ".R", export_folder = getwd(), object_name = "dat_draft", title = "Vietnam Draft Numbers", description = "This data can be used to teach correlation.", source = "https://www.randomservices.org/random/data/Draft.html", var_details = dd_descriptions)
 dpr_document(dd, extension = ".md", export_folder = getwd(), object_name = "dat_draft", title = "Vietnam Draft Numbers", description = "This data can be used to teach correlation.", source = "https://www.randomservices.org/random/data/Draft.html", var_details = dd_descriptions)
-\\\dontrun{
+\\dontrun{
 --data.name--
 }
 }

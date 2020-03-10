@@ -70,7 +70,7 @@ dpr_document  <-  function(data_object, extension = c(".md", ".R")[1], export_fo
              title = title, desc = description, format = format)
 
   cat(out, file = fs::path(export_folder, "data", ext = stringr::str_remove(extension, "\\.")), append = append)
-
+  devtools::document(fs::path_dir(export_folder))
 
   } else if (stringr::str_detect(extension, ".md|.MD")) {
   ### to build .md output

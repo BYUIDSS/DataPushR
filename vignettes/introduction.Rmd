@@ -13,7 +13,157 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+## Libraries
 
 ```{r setup}
-library(DataPushR)
+# install.packages("pacman")
+pacman::p_load_gh("BYUIDSS/DataPushR", dependencies = TRUE)
+pacman::p_load(tidyverse, gh, usethis)
 ```
+
+## Building an R data package
+
+The functions assume the use of GitHub to host the R data package.  We will build the package on our local computer and then connect the package to a GitHub repository.
+
+We will need to have the package [gh](https://github.com/r-lib/gh) installed and [git](https://git-scm.com/) installed on your computer for the setup to work.
+
+### Github setup
+
+We will use the package [usethis](https://usethis.r-lib.org/) to do some initial setup. Once you use `usethis::browse_github_pat()` you will be taken to [GitHub's token page](https://github.com/settings/tokens) for your account.  Please make sure to check the **delete_repo** option and then click the `generate token` button at the bottom of the page.
+
+After you click “Generate token”, the token will be displayed. It’s a string of 40 random letters and digits. This is the last time you will see it SO COPY IT TO THE CLIPBOARD. Leave this window open until you’re done. If you somehow goof this up, just generate a new one and try again. [ref](https://happygitwithr.com/github-pat.html)
+
+
+```{r, eval=FALSE}
+usethis::browse_github_pat()
+```
+
+You will want to use the `usethis::edit_r_environ()` function to open your `.renviron` file where your github information can be stored without being tracked in the cloud. [ref](https://happygitwithr.com/github-pat.html)
+
+```{r, eval=FALSE}
+# GITHUB_PAT=8c70fd8419398999c9ac5bacf3192882193cadf2
+
+usethis::edit_r_environ()
+```
+
+After completing the above details around GitHub you will need to restart R so your `.Renviron` file will load.  The `gh` package will now be able to connect to GitHub.  The next command will create a new public repository under your account
+
+```{r}
+package_name <- "DataPushRExample"
+github_info <- dpr_create_github(package_name)
+```
+
+### Building a local R package
+
+Now we can create a local R package with our data objects.
+
+#### Create your data objects and column descriptions
+
+Our package contains data about the Vietnam draft and we will use the `iris` data that comes with R. Notice the named lists that are used to describe each column.
+
+```{r}
+dat_draft <- read_csv(system.file("extdata", "Draft_vietnam.csv", package = "DataPushR"))
+
+dd_description <- list(day_month = "Day of the month", day_year = "Day of the year (1-365)", month = "1-12 for the numeric order of months", month_name = "The english name of the month", n69 = "1969 draft order. 1-366", n70 = "1970 draft order. 1-366", n71 = "1969 draft order. 1-366", n72 = "1972 draft order. 1-366")
+
+dpr_iris <- iris
+
+iris_description <- list(Sepal.Length = "The Length of the Sepal", Sepal.Width = "The Width of the Sepal", Petal.Length = "The Length of the Petal", Petal.Width = "The Width of the Petal", Species = "The Iris Species")
+
+```
+
+We will need to specify where the package folder will be created.  It is generally not good practice to create git managed folders within other git managed folders. You can specify your location by changing the `base_folder` variable below.  We have moved you one step higher than your current working directory.
+
+```{r}
+base_folder <- ".."
+```
+
+#### Using the DataPushR package process
+
+The `dpr_create_package()` allows you to import all the data objects you would like in your R data package. We will use a few more `DataPushR` functions to build out the package as well as some `usethis` functions. 
+
+The `dpr_create_package()` will create a `raw-data` folder that will have varied data formats for using the `dpr_export()` function.  This folder will be in the GitHub repository but will not be installed when the R package is installed from GitHub.  Users of your repository can then access the data objects without the need of R.
+
+```{r, eval=FALSE}
+
+package_path <- dpr_create_package(list_data = list(dat_draft = dat_draft, dpr_iris = dpr_iris), package_name = package_name, export_folder = base_folder, git_remote = github_info$html_url)
+```
+
+```{r, echo=FALSE}
+package_path <- read_rds("/Users/hathawayj/git/byuidss/DataPushR/ppath")
+```
+
+
+The `usethis` package allows us to set the project folder where there functions will be executed.  We will use this to create the R data objects for use in the R package
+
+```{r}
+
+usethis::proj_set(package_path)
+
+usethis::use_data(dat_draft, dpr_iris)
+```
+
+With the the `.rds` objects created we can now use `dpr_document` to create the help file for each data set.  The function needs to be run for each dataset in the package.  The default is to append to the `data.R` file in the `R` folder.  Set `append = FALSE` to create a clean `data.R` file if needed.
+
+```{r}
+dpr_document(dat_draft, extension = ".R", export_folder = fs::path(usethis::proj_get(), "R"),
+             object_name = "dat_draft", title = "Vietnam Draft Numbers",
+             description = "This data can be used to teach correlation.",
+             source = "https://www.randomservices.org/random/data/Draft.html",
+             var_details = dd_description)
+
+dpr_document(dpr_iris, extension = ".R", export_folder = fs::path(usethis::proj_get(), "R"),
+             object_name = "dpr_iris", title = "Iris Data",
+             description = "This data can be used to teach statistics.",
+             source = "Fisher",
+             var_details = iris_description)
+```
+
+By changing the extension to `'.md'` the same function will create a `data.md` in the repository with tables describing each column.
+
+```{r}
+dpr_document(dat_draft, extension = ".md", export_folder = fs::path(usethis::proj_get(), ""),
+             object_name = "dat_draft", title = "Vietnam Draft Numbers",
+             description = "This data can be used to teach correlation.",
+             source = "https://www.randomservices.org/random/data/Draft.html",
+             var_details = dd_description)
+
+dpr_document(dpr_iris, extension = ".md", export_folder = fs::path(usethis::proj_get(), ""),
+             object_name = "iris", title = "Iris Data",
+             description = "This data can be used to teach statistics.",
+             source = "Fisher",
+             var_details = iris_description)
+```
+
+Then we can create a default `readme.md` for the repository to help users install the package and push our repository updates to GitHub.
+
+```{r}
+dpr_readme(usethis::proj_get(), package_name, github_info$owner$login) 
+dpr_push(folder_dir = usethis::proj_get(), message = "'Second Push from Hathaway'", repo_url = NULL)
+```
+
+You should be able to install your GitHub R package using the following commands and then read a help file for each data object.
+
+```{r}
+package_load_text <- fs::path(github_info$owner$login, package_name)
+pacman::p_load_gh(package_load_text)
+?dat_draft
+?dpr_iris
+
+```
+
+#### Delete the repository
+
+You can now delete the example repository and start sharing your data sets.
+
+```{r}
+dpr_delete_github(owner_name = github_info$owner$login, repo_name = package_name)
+
+```
+
+
+
+
+## Creating data objects for Google Drive and Sheets
+
+Yet to come.

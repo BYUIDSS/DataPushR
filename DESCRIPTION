@@ -28,3 +28,6 @@ Imports:
     devtools,
     roxygen2,
     git2r
+VignetteBuilder: knitr
+Suggests: 
+    rmarkdown

@@ -150,6 +150,44 @@ dpr_delete_github <- function(owner_name, repo_name) {
 
 #' @title Write data R script
 #' @param folder_dir is the folder on your local computer where you store your git repository
-#' @param package_name is the name of the created data R package.
-#' @param github_user is the Github group or user where the package is stored.
+#' @param r_read either a path to an R script, the clipboard if `NULL`, or an `rlang::expr` object.
+#' @param r_folder_write a path to a folder where the R script will be written
+#' @param r_write the name of the file to write contents of `r_read`
+#' @param append_file Whether to append `TRUE` or overwrite `FALSE` (default) the file `r_write`.
 #' @export
+dpr_write_script <- function(folder_dir = "../../temp_data/Test2", r_read = "",
+                             r_folder_write = "data-raw", r_write = "", append_file = FALSE){
+
+  # build the path for the R script in the package where code will be written.
+  if (r_write == "") {
+    path_r_write <-  fs::dir_ls(fs::path(folder_dir, r_folder_write), regexp = ".R")
+
+    # stop if there is more than one R file.
+    if (length(path_r_write) > 1) {
+      stop("specify your R script as there is more than one shown in the folder")
+    }
+  } else  {
+    path_r_write <- fs::path(folder_dir, r_folder_write, r_write)
+  }
+
+  # get R code to write into the path_r_write file.
+ if (is.null(r_read) ) {
+   print("writing clipboard contents")
+   write_text <- readr::clipboard()
+
+  } else if (is.character(r_read)) {
+
+    # Writing the saved R script
+    write_text <- readr::read_lines(file = r_read)
+
+
+  } else if (is.expression(r_script)) {
+    # writing an expression
+    write_text <- rlang::expr_text(r_read)
+
+  } else {
+    stop("Expecting a NULL, file path as a character string, or an rlang expression object")
+  }
+  cat(write_text, file = path_r_write, append = append_file, sep = "\n")
+
+}

@@ -15,7 +15,13 @@ knitr::opts_chunk$set(
 ```
 ## Libraries
 
-```{r setup}
+```{r}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+
+```
+
+
+```{r libraries}
 # install.packages("pacman")
 pacman::p_load_gh("BYUIDSS/DataPushR", dependencies = TRUE)
 pacman::p_load(tidyverse, gh, usethis)
@@ -29,16 +35,16 @@ We will need to have the package [gh](https://github.com/r-lib/gh) installed and
 
 ### Github setup
 
-We will use the package [usethis](https://usethis.r-lib.org/) to do some initial setup. Once you use `usethis::browse_github_pat()` you will be taken to [GitHub's token page](https://github.com/settings/tokens) for your account.  Please make sure to check the **delete_repo** option and then click the `generate token` button at the bottom of the page.
+We will use the package [usethis](https://usethis.r-lib.org/) to do some initial setup. Once you use `usethis::browse_github_pat()` you will be taken to [GitHub's token page](https://github.com/settings/tokens) for your account. Please make sure to check the **delete_repo** option and then click the `generate token` button at the bottom of the page.
 
-After you click “Generate token”, the token will be displayed. It’s a string of 40 random letters and digits. This is the last time you will see it SO COPY IT TO THE CLIPBOARD. Leave this window open until you’re done. If you somehow goof this up, just generate a new one and try again. [ref](https://happygitwithr.com/github-pat.html)
+After you click "Generate token", the token will be displayed. It's a string of 40 random letters and digits. This is the last time you will see it SO COPY IT TO THE CLIPBOARD. Leave this window open until you're done. If you somehow goof this up, just generate a new one and try again. [ref](https://happygitwithr.com/github-pat.html)
 
 
 ```{r, eval=FALSE}
 usethis::browse_github_pat()
 ```
 
-You will want to use the `usethis::edit_r_environ()` function to open your `.renviron` file where your github information can be stored without being tracked in the cloud. [ref](https://happygitwithr.com/github-pat.html)
+You will want to use the `usethis::edit_r_environ()` function to open your `.renviron` file where your GitHub information can be stored without being tracked in the cloud. [ref](https://happygitwithr.com/github-pat.html)
 
 ```{r, eval=FALSE}
 # GITHUB_PAT=8c70fd8419398999c9ac5bacf3192882193cadf2
@@ -46,7 +52,7 @@ You will want to use the `usethis::edit_r_environ()` function to open your `.ren
 usethis::edit_r_environ()
 ```
 
-After completing the above details around GitHub you will need to restart R so your `.Renviron` file will load.  The `gh` package will now be able to connect to GitHub.  The next command will create a new public repository under your account
+After completing the above details around GitHub, you will need to restart R so your `.Renviron` file will load.  The `gh` package will now be able to connect to GitHub.  The next command will create a new public repository under your account
 
 ```{r}
 package_name <- "DataPushRExample"
@@ -59,7 +65,7 @@ Now we can create a local R package with our data objects.
 
 #### Create your data objects and column descriptions
 
-Our package contains data about the Vietnam draft and we will use the `iris` data that comes with R. Notice the named lists that are used to describe each column.
+Our package contains data about the Vietnam draft, and we will use the `iris` data that comes with R. Notice the named lists that are used to describe each column.
 
 ```{r}
 dat_draft <- read_csv(system.file("extdata", "Draft_vietnam.csv", package = "DataPushR"))
@@ -89,12 +95,7 @@ The `dpr_create_package()` will create a `raw-data` folder that will have varied
 package_path <- dpr_create_package(list_data = list(dat_draft = dat_draft, dpr_iris = dpr_iris), package_name = package_name, export_folder = base_folder, git_remote = github_info$html_url)
 ```
 
-```{r, echo=FALSE}
-package_path <- read_rds("/Users/hathawayj/git/byuidss/DataPushR/ppath")
-```
-
-
-The `usethis` package allows us to set the project folder where there functions will be executed.  We will use this to create the R data objects for use in the R package
+The `usethis` package allows us to set the project folder where their functions will be executed.  We will use this to create the R data objects for use in the R package.
 
 ```{r}
 
@@ -103,7 +104,7 @@ usethis::proj_set(package_path)
 usethis::use_data(dat_draft, dpr_iris)
 ```
 
-With the the `.rds` objects created we can now use `dpr_document` to create the help file for each data set.  The function needs to be run for each dataset in the package.  The default is to append to the `data.R` file in the `R` folder.  Set `append = FALSE` to create a clean `data.R` file if needed.
+With the the `.rds` objects created, we can now use `dpr_document` to create the help file for each data set.  The function needs to be run for each dataset in the package.  The default is to append to the `data.R` file in the `R` folder.  Set `append = FALSE` to create a clean `data.R` file if needed.
 
 ```{r}
 dpr_document(dat_draft, extension = ".R", export_folder = fs::path(usethis::proj_get(), "R"),
@@ -119,7 +120,7 @@ dpr_document(dpr_iris, extension = ".R", export_folder = fs::path(usethis::proj_
              var_details = iris_description)
 ```
 
-By changing the extension to `'.md'` the same function will create a `data.md` in the repository with tables describing each column.
+By changing the extension to ".md ", the same function will create a `data.md` in the repository with tables describing each column.
 
 ```{r}
 dpr_document(dat_draft, extension = ".md", export_folder = fs::path(usethis::proj_get(), ""),
@@ -159,7 +160,7 @@ You can now delete the example repository and start sharing your data sets.
 ```{r}
 dpr_delete_github(owner_name = github_info$owner$login, repo_name = package_name)
 
-```
+`"
 
 
 

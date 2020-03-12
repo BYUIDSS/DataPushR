@@ -8,7 +8,7 @@ The goal of DataPushR is to ...
 
 ## Installation
 
-You can install the released version of DataPushR from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of DataPushR using the below call.
 
 ``` r
 install.packages("pacman")

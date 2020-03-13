@@ -132,7 +132,7 @@ pacman::p_load_gh('--github--')
 #' @param github_user is the Github group or user where the package is stored.
 #' @export
 dpr_create_github <- function(package_name, post_text = c("/orgs/ORGNAME/repos", "/user/repos")[2], public = TRUE) {
-  create_gh <- gh::gh(glue::glue("POST {post}",post = post_text), name = package_name,
+  create_gh <- gh::gh(glue::glue("POST {post}", post = post_text), name = package_name,
                       private = !public, has_wiki = FALSE, auto_init = FALSE)
   create_gh
 }

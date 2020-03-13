@@ -2,8 +2,8 @@
 #' @title Build data documentation
 #' @description  Document data file as a readme or as `data.R` for use when building to `.Rd` file for an R package.
 #' @param data_object is an R data frame.
-#' @param extension is a character vector of formats to build.  Defaults to ".md".  Potential extensions are `.md` and `.R`
-#' @param export_folder is the folder where the data document files will be placed.
+#' @param extension is a character vector of formats to build.  Defaults to "md".  Potential extensions are `md` and `R`.  If both documents are desired then `mdR` or any combination can be used to get both.
+#' @param export_folder is the folder where the data document files will be placed. If the extension is `.R` then the `export_folder` will have the subdirectory `R` added.
 #' @param object_name is the name of the data object for an R package data set or the name of the file for and md extension.
 #' @param title is the title of the data.
 #' @param description is a short description of the data. If NULL then not used.
@@ -18,7 +18,7 @@
 #'	dpr_document(dd, extension = ".md", export_folder = getwd(), object_name = "dat_draft", title = "Vietnam Draft Numbers", description = "This data can be used to teach correlation.", source = "https://www.randomservices.org/random/data/Draft.html", var_details = dd_descriptions)
 #' @format a text object is returned and a file is writtern to the folder specificed named data.
 #' @export
-dpr_document  <-  function(data_object, extension = c(".md", ".R")[1], export_folder = "R", object_name = "pdat",
+dpr_document  <-  function(data_object, extension = "md", export_folder = "R", object_name = "pdat",
                            title = "My title of my data", description = "Short Description",
                            source = "Where the data was found", format = "A data frame with columns:",
                            var_details = list(day_month = "The numbered day of the month",
@@ -40,7 +40,7 @@ dpr_document  <-  function(data_object, extension = c(".md", ".R")[1], export_fo
 
 
   ### to build output
-  if (stringr::str_detect(extension, ".R|.r")) {
+  if (stringr::str_detect(extension, ".R|R|.r|r")) {
   ### to build .R output
 
   var_glue <- purrr::map2(names_info$variable, names_info$full_description,
@@ -69,10 +69,12 @@ dpr_document  <-  function(data_object, extension = c(".md", ".R")[1], export_fo
              data.name = object_name, items = var_glue,
              title = title, desc = description, format = format)
 
-  cat(out, file = fs::path(export_folder, "data", ext = stringr::str_remove(extension, "\\.")), append = append)
+
+  cat(out, file = fs::path(export_folder, "R", "data", ext = "R", append = append)
+
   devtools::document(fs::path_dir(export_folder))
 
-  } else if (stringr::str_detect(extension, ".md|.MD")) {
+  } else if (stringr::str_detect(extension, ".md|md|.MD|MD")) {
   ### to build .md output
   ###
     var_glue <- dplyr::select(names_info, -full_description ) %>%
@@ -100,7 +102,7 @@ The data is called --data.name--.
                       data.name = object_name, items = var_glue,
                       title = title, desc = description, format = format)
 
-    cat(out, file = fs::path(export_folder, "data", ext = stringr::str_remove(extension, "\\.")), append = append)
+    cat(out, file = fs::path(export_folder, "data", ext = ".md"), append = append)
 
 
   } else {

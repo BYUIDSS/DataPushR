@@ -155,8 +155,7 @@ dpr_delete_github <- function(owner_name, repo_name) {
 #' @param r_write the name of the file to write contents of `r_read`
 #' @param append_file Whether to append `TRUE` or overwrite `FALSE` (default) the file `r_write`.
 #' @export
-dpr_write_script <- function(folder_dir = "../../temp_data/Test2", r_read = "",
-                             r_folder_write = "data-raw", r_write = "", append_file = FALSE){
+dpr_write_script <- function(folder_dir, r_read = "", r_folder_write = "data-raw", r_write = "", append_file = FALSE){
 
   # build the path for the R script in the package where code will be written.
   if (r_write == "") {

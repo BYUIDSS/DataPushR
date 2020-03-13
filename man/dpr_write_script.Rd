@@ -5,7 +5,7 @@
 \title{Write data R script}
 \usage{
 dpr_write_script(
-  folder_dir = "../../temp_data/Test2",
+  folder_dir,
   r_read = "",
   r_folder_write = "data-raw",
   r_write = "",

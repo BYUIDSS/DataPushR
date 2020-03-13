@@ -69,12 +69,11 @@ dpr_document  <-  function(data_object, extension = "md", export_folder = "R", o
              data.name = object_name, items = var_glue,
              title = title, desc = description, format = format)
 
-
   cat(out, file = fs::path(export_folder, "R", "data", ext = "R"), append = append)
 
-  devtools::document(fs::path_dir(export_folder))
+  }
 
-  } else if (stringr::str_detect(extension, ".md|md|.MD|MD")) {
+  if (stringr::str_detect(extension, ".md|md|.MD|MD")) {
   ### to build .md output
   ###
     var_glue <- dplyr::select(names_info, -full_description ) %>%
@@ -102,10 +101,12 @@ The data is called --data.name--.
                       data.name = object_name, items = var_glue,
                       title = title, desc = description, format = format)
 
-    cat(out, file = fs::path(export_folder, "data", ext = ".md"), append = append)
+    cat(out, file = fs::path(export_folder, "data", ext = "md"), append = append)
 
 
-  } else {
+  }
+
+  if (!stringr::str_detect(extension, ".md|md|.MD|MD|.R|R|.r|r")) {
   ### error
 
     stop("Only extensions are markdown and r scripts.  Please use one of them.")

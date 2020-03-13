@@ -112,8 +112,8 @@ The data descriptions can be found at [data.md](data.md). The [data-raw](data-ra
 ## Installation
 
 ```r
-install.packages(pacman)
-pacman::p_load_gh('--github--')
+install.packages('devtools')
+devtools::install_github('--github--')
 ```
 \n\n\n
     ", .open = "--", .close = "--",

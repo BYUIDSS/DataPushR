@@ -4,7 +4,8 @@
 \name{dat_draft}
 \alias{dat_draft}
 \title{Vietnam Draft Numbers}
-\format{A data frame with columns:
+\format{
+A data frame with columns:
 \describe{
  \item{day_month}{A value between 1924 and 2015.}
  \item{day_year}{Maple products expressed as syrup, total in thousands of gallons.}
@@ -14,7 +15,8 @@
  \item{n70}{1970 draft order}
  \item{n71}{1971 draft order}
  \item{n72}{1972 draft order}
-}}
+}
+}
 \source{
 https://www.randomservices.org/random/data/Draft.html
 }

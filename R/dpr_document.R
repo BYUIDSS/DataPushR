@@ -70,7 +70,7 @@ dpr_document  <-  function(data_object, extension = "md", export_folder = "R", o
              title = title, desc = description, format = format)
 
 
-  cat(out, file = fs::path(export_folder, "R", "data", ext = "R", append = append)
+  cat(out, file = fs::path(export_folder, "R", "data", ext = "R"), append = append)
 
   devtools::document(fs::path_dir(export_folder))
 

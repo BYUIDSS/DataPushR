@@ -125,7 +125,7 @@
 
     <pre class="usage"><span class='fu'>dpr_document</span>(
   <span class='no'>data_object</span>,
-  <span class='kw'>extension</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>".md"</span>, <span class='st'>".R"</span>)[<span class='fl'>1</span>],
+  <span class='kw'>extension</span> <span class='kw'>=</span> <span class='st'>"md"</span>,
   <span class='kw'>export_folder</span> <span class='kw'>=</span> <span class='st'>"R"</span>,
   <span class='kw'>object_name</span> <span class='kw'>=</span> <span class='st'>"pdat"</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"My title of my data"</span>,
@@ -147,11 +147,11 @@
     </tr>
     <tr>
       <th>extension</th>
-      <td><p>is a character vector of formats to build.  Defaults to ".md".  Potential extensions are `.md` and `.R`</p></td>
+      <td><p>is a character vector of formats to build.  Defaults to "md".  Potential extensions are `md` and `R`.  If both documents are desired then `mdR` or any combination can be used to get both.</p></td>
     </tr>
     <tr>
       <th>export_folder</th>
-      <td><p>is the folder where the data document files will be placed.</p></td>
+      <td><p>is the folder where the data document files will be placed. If the extension is `.R` then the `export_folder` will have the subdirectory `R` added.</p></td>
     </tr>
     <tr>
       <th>object_name</th>
@@ -190,6 +190,8 @@
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>a text object is returned and a file is writtern to the folder specificed named data.</p>
+<p>--format--
+\describe</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"></pre>

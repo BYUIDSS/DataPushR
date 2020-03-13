@@ -3,11 +3,17 @@
 \name{dpr_document}
 \alias{dpr_document}
 \title{Build data documentation}
-\format{a text object is returned and a file is writtern to the folder specificed named data.}
+\format{
+a text object is returned and a file is writtern to the folder specificed named data.
+
+--format--
+\\describe{
+}
+}
 \usage{
 dpr_document(
   data_object,
-  extension = c(".md", ".R")[1],
+  extension = "md",
   export_folder = "R",
   object_name = "pdat",
   title = "My title of my data",
@@ -23,9 +29,9 @@ dpr_document(
 \arguments{
 \item{data_object}{is an R data frame.}
 
-\item{extension}{is a character vector of formats to build.  Defaults to ".md".  Potential extensions are `.md` and `.R`}
+\item{extension}{is a character vector of formats to build.  Defaults to "md".  Potential extensions are `md` and `R`.  If both documents are desired then `mdR` or any combination can be used to get both.}
 
-\item{export_folder}{is the folder where the data document files will be placed.}
+\item{export_folder}{is the folder where the data document files will be placed. If the extension is `.R` then the `export_folder` will have the subdirectory `R` added.}
 
 \item{object_name}{is the name of the data object for an R package data set or the name of the file for and md extension.}
 

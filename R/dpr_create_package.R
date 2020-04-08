@@ -131,13 +131,23 @@ devtools::install_github('--github--')
 
 
 #' @title Github Repo Create
-#' @param package_name is the name of the created data R package.
-#' @param post_text is the api info for the POST command '/orgs/ORGNAME/repos' or '/USER/repos'
+#' @param repo_name is the name of the created data R package and repository name.
+#' @param owner_name is the name of the org or user that owns the repo.
+#' @param group defaults to TRUE and uses the group POST command to a org if FALSE uses users POST command.
 #' @export
-dpr_create_github <- function(package_name, post_text, public = TRUE) {
-  create_gh <- gh::gh(glue::glue("POST {post}", post = post_text), name = package_name,
-                      private = !public, has_wiki = FALSE, auto_init = FALSE)
-  create_gh
+dpr_create_github <- function(owner_name, repo_name, public = TRUE, group = TRUE) {
+
+
+  if (group) {
+      api_string <- glue::glue('/orgs/{ORGNAME}/repos', ORGNAME = owner_name)
+    } else {
+      api_string <- glue::glue('users/{USER}/repos', USER = owner_name)
+    }
+
+
+  gh::gh(glue::glue("POST {post}", post = api_string), name = repo_name,
+         private = !public, has_wiki = FALSE, auto_init = FALSE)
+
 }
 
 
@@ -146,18 +156,19 @@ dpr_create_github <- function(package_name, post_text, public = TRUE) {
 #' @param repo_name is the name of the repo to delete.
 #' @export
 dpr_delete_github <- function(owner_name, repo_name) {
-  delete_gh <- gh::gh("DELETE /repos/:owner/:repo", owner = owner_name, repo = repo_name)
-  delete_gh
+
+  gh::gh("DELETE /repos/:owner/:repo", owner = owner_name, repo = repo_name)
+
 }
 
 #' @title Github Repo Information
-#' @param package_name is the name of the created data R package.
-#' @param name is the group or github username depanding on group setting.
+#' @param owner_name is the Github group or user where the package is stored.
+#' @param repo_name is the name of the repo for information.
 #' @examples dpr_info_github("data4legos", "byuidatascience")
 #' @export
-dpr_info_github <- function(package_name, name) {
+dpr_info_github <- function(owner_name, repo_name) {
 
- gh::gh(glue::glue('GET /repos/{USER}/{repo}', USER = name, repo = package_name))
+ gh::gh(glue::glue('GET /repos/{USER}/{repo}', USER = owner_name, repo = repo_name))
 
 }
 

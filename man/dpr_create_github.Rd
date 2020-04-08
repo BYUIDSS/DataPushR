@@ -4,12 +4,14 @@
 \alias{dpr_create_github}
 \title{Github Repo Create}
 \usage{
-dpr_create_github(package_name, post_text, public = TRUE)
+dpr_create_github(owner_name, repo_name, public = TRUE, group = TRUE)
 }
 \arguments{
-\item{package_name}{is the name of the created data R package.}
+\item{owner_name}{is the name of the org or user that owns the repo.}
 
-\item{post_text}{is the api info for the POST command '/orgs/ORGNAME/repos' or '/USER/repos'}
+\item{repo_name}{is the name of the created data R package and repository name.}
+
+\item{group}{defaults to TRUE and uses the group POST command to a org if FALSE uses users POST command.}
 }
 \description{
 Github Repo Create

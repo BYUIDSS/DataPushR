@@ -4,12 +4,12 @@
 \alias{dpr_info_github}
 \title{Github Repo Information}
 \usage{
-dpr_info_github(package_name, name)
+dpr_info_github(owner_name, repo_name)
 }
 \arguments{
-\item{package_name}{is the name of the created data R package.}
+\item{owner_name}{is the Github group or user where the package is stored.}
 
-\item{name}{is the group or github username depanding on group setting.}
+\item{repo_name}{is the name of the repo for information.}
 }
 \description{
 Github Repo Information

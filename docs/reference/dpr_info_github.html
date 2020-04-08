@@ -121,149 +121,29 @@
     <p>Github Repo Information</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dpr_info_github</span>(<span class='no'>package_name</span>, <span class='no'>name</span>)</pre>
+    <pre class="usage"><span class='fu'>dpr_info_github</span>(<span class='no'>owner_name</span>, <span class='no'>repo_name</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>package_name</th>
-      <td><p>is the name of the created data R package.</p></td>
+      <th>owner_name</th>
+      <td><p>is the Github group or user where the package is stored.</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>is the group or github username depanding on group setting.</p></td>
+      <th>repo_name</th>
+      <td><p>is the name of the repo for information.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>dpr_info_github</span>(<span class='st'>"data4legos"</span>, <span class='st'>"byuidatascience"</span>)</div><div class='output co'>#&gt; {
-#&gt;   "id": 250321685,
-#&gt;   "node_id": "MDEwOlJlcG9zaXRvcnkyNTAzMjE2ODU=",
-#&gt;   "name": "data4legos",
-#&gt;   "full_name": "byuidatascience/data4legos",
-#&gt;   "private": false,
-#&gt;   "owner": {
-#&gt;     "login": "byuidatascience",
-#&gt;     "id": 28453806,
-#&gt;     "node_id": "MDEyOk9yZ2FuaXphdGlvbjI4NDUzODA2",
-#&gt;     "avatar_url": "https://avatars3.githubusercontent.com/u/28453806?v=4",
-#&gt;     "gravatar_id": "",
-#&gt;     "url": "https://api.github.com/users/byuidatascience",
-#&gt;     "html_url": "https://github.com/byuidatascience",
-#&gt;     "followers_url": "https://api.github.com/users/byuidatascience/followers",
-#&gt;     "following_url": "https://api.github.com/users/byuidatascience/following{/other_user}",
-#&gt;     "gists_url": "https://api.github.com/users/byuidatascience/gists{/gist_id}",
-#&gt;     "starred_url": "https://api.github.com/users/byuidatascience/starred{/owner}{/repo}",
-#&gt;     "subscriptions_url": "https://api.github.com/users/byuidatascience/subscriptions",
-#&gt;     "organizations_url": "https://api.github.com/users/byuidatascience/orgs",
-#&gt;     "repos_url": "https://api.github.com/users/byuidatascience/repos",
-#&gt;     "events_url": "https://api.github.com/users/byuidatascience/events{/privacy}",
-#&gt;     "received_events_url": "https://api.github.com/users/byuidatascience/received_events",
-#&gt;     "type": "Organization",
-#&gt;     "site_admin": false
-#&gt;   },
-#&gt;   "html_url": "https://github.com/byuidatascience/data4legos",
-#&gt;   "description": {},
-#&gt;   "fork": false,
-#&gt;   "url": "https://api.github.com/repos/byuidatascience/data4legos",
-#&gt;   "forks_url": "https://api.github.com/repos/byuidatascience/data4legos/forks",
-#&gt;   "keys_url": "https://api.github.com/repos/byuidatascience/data4legos/keys{/key_id}",
-#&gt;   "collaborators_url": "https://api.github.com/repos/byuidatascience/data4legos/collaborators{/collaborator}",
-#&gt;   "teams_url": "https://api.github.com/repos/byuidatascience/data4legos/teams",
-#&gt;   "hooks_url": "https://api.github.com/repos/byuidatascience/data4legos/hooks",
-#&gt;   "issue_events_url": "https://api.github.com/repos/byuidatascience/data4legos/issues/events{/number}",
-#&gt;   "events_url": "https://api.github.com/repos/byuidatascience/data4legos/events",
-#&gt;   "assignees_url": "https://api.github.com/repos/byuidatascience/data4legos/assignees{/user}",
-#&gt;   "branches_url": "https://api.github.com/repos/byuidatascience/data4legos/branches{/branch}",
-#&gt;   "tags_url": "https://api.github.com/repos/byuidatascience/data4legos/tags",
-#&gt;   "blobs_url": "https://api.github.com/repos/byuidatascience/data4legos/git/blobs{/sha}",
-#&gt;   "git_tags_url": "https://api.github.com/repos/byuidatascience/data4legos/git/tags{/sha}",
-#&gt;   "git_refs_url": "https://api.github.com/repos/byuidatascience/data4legos/git/refs{/sha}",
-#&gt;   "trees_url": "https://api.github.com/repos/byuidatascience/data4legos/git/trees{/sha}",
-#&gt;   "statuses_url": "https://api.github.com/repos/byuidatascience/data4legos/statuses/{sha}",
-#&gt;   "languages_url": "https://api.github.com/repos/byuidatascience/data4legos/languages",
-#&gt;   "stargazers_url": "https://api.github.com/repos/byuidatascience/data4legos/stargazers",
-#&gt;   "contributors_url": "https://api.github.com/repos/byuidatascience/data4legos/contributors",
-#&gt;   "subscribers_url": "https://api.github.com/repos/byuidatascience/data4legos/subscribers",
-#&gt;   "subscription_url": "https://api.github.com/repos/byuidatascience/data4legos/subscription",
-#&gt;   "commits_url": "https://api.github.com/repos/byuidatascience/data4legos/commits{/sha}",
-#&gt;   "git_commits_url": "https://api.github.com/repos/byuidatascience/data4legos/git/commits{/sha}",
-#&gt;   "comments_url": "https://api.github.com/repos/byuidatascience/data4legos/comments{/number}",
-#&gt;   "issue_comment_url": "https://api.github.com/repos/byuidatascience/data4legos/issues/comments{/number}",
-#&gt;   "contents_url": "https://api.github.com/repos/byuidatascience/data4legos/contents/{+path}",
-#&gt;   "compare_url": "https://api.github.com/repos/byuidatascience/data4legos/compare/{base}...{head}",
-#&gt;   "merges_url": "https://api.github.com/repos/byuidatascience/data4legos/merges",
-#&gt;   "archive_url": "https://api.github.com/repos/byuidatascience/data4legos/{archive_format}{/ref}",
-#&gt;   "downloads_url": "https://api.github.com/repos/byuidatascience/data4legos/downloads",
-#&gt;   "issues_url": "https://api.github.com/repos/byuidatascience/data4legos/issues{/number}",
-#&gt;   "pulls_url": "https://api.github.com/repos/byuidatascience/data4legos/pulls{/number}",
-#&gt;   "milestones_url": "https://api.github.com/repos/byuidatascience/data4legos/milestones{/number}",
-#&gt;   "notifications_url": "https://api.github.com/repos/byuidatascience/data4legos/notifications{?since,all,participating}",
-#&gt;   "labels_url": "https://api.github.com/repos/byuidatascience/data4legos/labels{/name}",
-#&gt;   "releases_url": "https://api.github.com/repos/byuidatascience/data4legos/releases{/id}",
-#&gt;   "deployments_url": "https://api.github.com/repos/byuidatascience/data4legos/deployments",
-#&gt;   "created_at": "2020-03-26T17:09:20Z",
-#&gt;   "updated_at": "2020-03-28T20:55:15Z",
-#&gt;   "pushed_at": "2020-03-28T20:55:10Z",
-#&gt;   "git_url": "git://github.com/byuidatascience/data4legos.git",
-#&gt;   "ssh_url": "git@github.com:byuidatascience/data4legos.git",
-#&gt;   "clone_url": "https://github.com/byuidatascience/data4legos.git",
-#&gt;   "svn_url": "https://github.com/byuidatascience/data4legos",
-#&gt;   "homepage": {},
-#&gt;   "size": 5209609,
-#&gt;   "stargazers_count": 0,
-#&gt;   "watchers_count": 0,
-#&gt;   "language": {},
-#&gt;   "has_issues": true,
-#&gt;   "has_projects": true,
-#&gt;   "has_downloads": true,
-#&gt;   "has_wiki": false,
-#&gt;   "has_pages": false,
-#&gt;   "forks_count": 0,
-#&gt;   "mirror_url": {},
-#&gt;   "archived": false,
-#&gt;   "disabled": false,
-#&gt;   "open_issues_count": 0,
-#&gt;   "license": {},
-#&gt;   "forks": 0,
-#&gt;   "open_issues": 0,
-#&gt;   "watchers": 0,
-#&gt;   "default_branch": "master",
-#&gt;   "permissions": {
-#&gt;     "admin": true,
-#&gt;     "push": true,
-#&gt;     "pull": true
-#&gt;   },
-#&gt;   "temp_clone_token": "",
-#&gt;   "allow_squash_merge": true,
-#&gt;   "allow_merge_commit": true,
-#&gt;   "allow_rebase_merge": true,
-#&gt;   "delete_branch_on_merge": false,
-#&gt;   "organization": {
-#&gt;     "login": "byuidatascience",
-#&gt;     "id": 28453806,
-#&gt;     "node_id": "MDEyOk9yZ2FuaXphdGlvbjI4NDUzODA2",
-#&gt;     "avatar_url": "https://avatars3.githubusercontent.com/u/28453806?v=4",
-#&gt;     "gravatar_id": "",
-#&gt;     "url": "https://api.github.com/users/byuidatascience",
-#&gt;     "html_url": "https://github.com/byuidatascience",
-#&gt;     "followers_url": "https://api.github.com/users/byuidatascience/followers",
-#&gt;     "following_url": "https://api.github.com/users/byuidatascience/following{/other_user}",
-#&gt;     "gists_url": "https://api.github.com/users/byuidatascience/gists{/gist_id}",
-#&gt;     "starred_url": "https://api.github.com/users/byuidatascience/starred{/owner}{/repo}",
-#&gt;     "subscriptions_url": "https://api.github.com/users/byuidatascience/subscriptions",
-#&gt;     "organizations_url": "https://api.github.com/users/byuidatascience/orgs",
-#&gt;     "repos_url": "https://api.github.com/users/byuidatascience/repos",
-#&gt;     "events_url": "https://api.github.com/users/byuidatascience/events{/privacy}",
-#&gt;     "received_events_url": "https://api.github.com/users/byuidatascience/received_events",
-#&gt;     "type": "Organization",
-#&gt;     "site_admin": false
-#&gt;   },
-#&gt;   "network_count": 0,
-#&gt;   "subscribers_count": 2
-#&gt; } </div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>dpr_info_github</span>(<span class='st'>"data4legos"</span>, <span class='st'>"byuidatascience"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in gh_process_response(raw): </span>
+#&gt; <span class='error'>GitHub API error (404): 404 Not Found</span>
+#&gt; <span class='error'>Message: Not Found</span>
+#&gt; <span class='error'>Read more at https://developer.github.com/v3/repos/#get</span>
+#&gt; <span class='error'></span>
+#&gt; <span class='error'>URL not found: https://api.github.com/repos/data4legos/byuidatascience</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

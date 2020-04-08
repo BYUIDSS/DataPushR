@@ -59,6 +59,7 @@ dpr_document  <-  function(data_object, extension = "md", export_folder = "R", o
 #' \\describe{
 --items--
 #' }
+#' @source \\url{--source--}
 #' @examples
 #' \\dontrun{
 #' --data.name--
@@ -67,7 +68,7 @@ dpr_document  <-  function(data_object, extension = "md", export_folder = "R", o
 \n\n\n
 ", .open = "--", .close = "--",
              data.name = object_name, items = var_glue,
-             title = title, desc = description, format = format)
+             title = title, desc = description, format = format, source = source)
 
   cat(out, file = fs::path(export_folder, "R", "data", ext = "R"), append = append)
 
@@ -91,6 +92,8 @@ The data is called --data.name--.
 
 --desc--
 
+The source of this data is < --source-- >
+
 ### Data format
 
 --format--
@@ -99,7 +102,7 @@ The data is called --data.name--.
 \n\n\n
     ", .open = "--", .close = "--",
                       data.name = object_name, items = var_glue,
-                      title = title, desc = description, format = format)
+                      title = title, desc = description, format = format, source = source)
 
     cat(out, file = fs::path(export_folder, "data", ext = "md"), append = append)
 

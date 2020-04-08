@@ -8,15 +8,15 @@
 
 #' @title Create an R package for data
 #' @description This function automates the process of building a Github R package with the desired data stored in the `raw-data` folder.
-#' @param list_data is a list object of named ojbects that can be written to a csv.
 #' @param package_name is the name of the created data R package.
 #' @param export_folder is the base folder where the package folder will be created.
 #' @param git_remote is the `HTTPS` url of the GitHub remote.
+#' @param list_data is a list object of named ojbects that can be written to a csv. If NULL then no data writing actions happen.
 #' @examples dd <- read_csv(system.file("extdata", "Draft_vietnam.csv", package = "DataPushR"))
 #' dpr_create_package(list_data = list(dat_draft = dd), package_name = "Test3", export_folder = getwd())
 #' @export
 
-dpr_create_package <- function(list_data, package_name, export_folder = getwd(), git_remote) {
+dpr_create_package <- function(package_name, export_folder = getwd(), git_remote, list_data = NULL) {
 
   # https://www.tidyverse.org/blog/2019/05/itdepends/
 
@@ -34,30 +34,34 @@ dpr_create_package <- function(list_data, package_name, export_folder = getwd(),
   raw_data_script_path <- fs::path(ppath, "data-raw", package_name, ext = "R")
   raw_data_folder <- fs::path(ppath, "data-raw")
 
-  temp_dir <- tempdir(check = TRUE)
-  temp_data_paths <- purrr::map(names(list_data),~(fs::path(temp_dir, .x, ext = "csv")))
-  map2(names(list_data), list_data, ~readr::write_csv(.y, fs::path(temp_dir, .x, ext = "csv")))
-  temp_data_paths %>% purrr::map(~dpr_export(.x,
-                                       export_format = c(".rds",".xlsx",".sav",".dta",".csv", ".json", ".sas7bdat"),
-                                       export_folder = raw_data_folder, details = FALSE))
+  # write data if list_data has data objects if not skip.
+  if (!is.null(list_data)) {
+    temp_dir <- tempdir(check = TRUE)
+    temp_data_paths <- purrr::map(names(list_data),~(fs::path(temp_dir, .x, ext = "csv")))
+    map2(names(list_data), list_data, ~readr::write_csv(.y, fs::path(temp_dir, .x, ext = "csv")))
+    temp_data_paths %>% purrr::map(~dpr_export(.x,
+                                               export_format = c(".rds",".xlsx",".sav",".dta",".csv", ".json", ".sas7bdat"),
+                                               export_folder = raw_data_folder, details = FALSE))
 
-  # Remove temp files created
-  temp_data_paths %>% purrr::map(~fs::file_delete(.x))
+    # Remove temp files created
+    temp_data_paths %>% purrr::map(~fs::file_delete(.x))
 
-  # check for sizes that are too big
-  sizes <- fs::dir_info(raw_data_folder, recurse = TRUE) %>%
-    mutate(size_big = size > fs::fs_bytes("100M")) %>%
-    select(path, size, size_big, birth_time)
+    # check for sizes that are too big
+    sizes <- fs::dir_info(raw_data_folder, recurse = TRUE) %>%
+      mutate(size_big = size > fs::fs_bytes("100M")) %>%
+      select(path, size, size_big, birth_time)
 
-  repo <- git2r::init(usethis::proj_get())
+    if(any(sizes$size_big)) stop("Some data files are larger than the 100M file limit for GitHub. No connection made.")
 
-  if(any(sizes$size_big)) stop("Some data files are larger than the 100M file limit for GitHub. No connection made.")
+  } # end data create if for list_data
 
+  proj_path <- usethis::proj_get()
 
+  repo <- git2r::init(proj_path)
 
-  dpr_push(usethis::proj_get(), message = "'first push'", repo_url = git_remote)
+    dpr_push(proj_path, message = "'first push'", repo_url = git_remote)
 
-  return(usethis::proj_get())
+  return(proj_path)
   # use_git_remote(name = "origin", url = git_remote, overwrite = FALSE)
   # git2r::add(repo, "*")
   # git2r::commit(repo, message = "Initial commit")
@@ -127,11 +131,10 @@ devtools::install_github('--github--')
 
 
 #' @title Github Repo Create
-#' @param folder_dir is the folder on your local computer where you store your git repository
 #' @param package_name is the name of the created data R package.
-#' @param github_user is the Github group or user where the package is stored.
+#' @param post_text is the api info for the POST command '/orgs/ORGNAME/repos' or '/USER/repos'
 #' @export
-dpr_create_github <- function(package_name, post_text = c("/orgs/ORGNAME/repos", "/user/repos")[2], public = TRUE) {
+dpr_create_github <- function(package_name, post_text, public = TRUE) {
   create_gh <- gh::gh(glue::glue("POST {post}", post = post_text), name = package_name,
                       private = !public, has_wiki = FALSE, auto_init = FALSE)
   create_gh
@@ -139,14 +142,27 @@ dpr_create_github <- function(package_name, post_text = c("/orgs/ORGNAME/repos",
 
 
 #' @title Github Repo Delete
-#' @param folder_dir is the folder on your local computer where you store your git repository
-#' @param package_name is the name of the created data R package.
-#' @param github_user is the Github group or user where the package is stored.
+#' @param owner_name is the Github group or user where the package is stored.
+#' @param repo_name is the name of the repo to delete.
 #' @export
 dpr_delete_github <- function(owner_name, repo_name) {
   delete_gh <- gh::gh("DELETE /repos/:owner/:repo", owner = owner_name, repo = repo_name)
   delete_gh
 }
+
+#' @title Github Repo Information
+#' @param package_name is the name of the created data R package.
+#' @param name is the group or github username depanding on group setting.
+#' @examples dpr_info_github("data4legos", "byuidatascience")
+#' @export
+dpr_info_github <- function(package_name, name) {
+
+ gh::gh(glue::glue('GET /repos/{USER}/{repo}', USER = name, repo = package_name))
+
+}
+
+
+
 
 #' @title Write data R script
 #' @param folder_dir is the folder on your local computer where you store your git repository
@@ -190,3 +206,6 @@ dpr_write_script <- function(folder_dir, r_read = "", r_folder_write = "data-raw
   cat(write_text, file = path_r_write, append = append_file, sep = "\n")
 
 }
+
+
+

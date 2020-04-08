@@ -7,11 +7,9 @@
 dpr_delete_github(owner_name, repo_name)
 }
 \arguments{
-\item{folder_dir}{is the folder on your local computer where you store your git repository}
+\item{owner_name}{is the Github group or user where the package is stored.}
 
-\item{package_name}{is the name of the created data R package.}
-
-\item{github_user}{is the Github group or user where the package is stored.}
+\item{repo_name}{is the name of the repo to delete.}
 }
 \description{
 Github Repo Delete

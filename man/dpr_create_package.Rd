@@ -5,20 +5,20 @@
 \title{Create an R package for data}
 \usage{
 dpr_create_package(
-  list_data,
   package_name,
   export_folder = getwd(),
-  git_remote
+  git_remote,
+  list_data = NULL
 )
 }
 \arguments{
-\item{list_data}{is a list object of named ojbects that can be written to a csv.}
-
 \item{package_name}{is the name of the created data R package.}
 
 \item{export_folder}{is the base folder where the package folder will be created.}
 
 \item{git_remote}{is the `HTTPS` url of the GitHub remote.}
+
+\item{list_data}{is a list object of named ojbects that can be written to a csv. If NULL then no data writing actions happen.}
 }
 \description{
 This function automates the process of building a Github R package with the desired data stored in the `raw-data` folder.

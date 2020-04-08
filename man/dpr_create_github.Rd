@@ -4,18 +4,12 @@
 \alias{dpr_create_github}
 \title{Github Repo Create}
 \usage{
-dpr_create_github(
-  package_name,
-  post_text = c("/orgs/ORGNAME/repos", "/user/repos")[2],
-  public = TRUE
-)
+dpr_create_github(package_name, post_text, public = TRUE)
 }
 \arguments{
 \item{package_name}{is the name of the created data R package.}
 
-\item{folder_dir}{is the folder on your local computer where you store your git repository}
-
-\item{github_user}{is the Github group or user where the package is stored.}
+\item{post_text}{is the api info for the POST command '/orgs/ORGNAME/repos' or '/USER/repos'}
 }
 \description{
 Github Repo Create

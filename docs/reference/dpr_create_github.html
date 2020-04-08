@@ -121,11 +121,7 @@
     <p>Github Repo Create</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dpr_create_github</span>(
-  <span class='no'>package_name</span>,
-  <span class='kw'>post_text</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"/orgs/ORGNAME/repos"</span>, <span class='st'>"/user/repos"</span>)[<span class='fl'>2</span>],
-  <span class='kw'>public</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>dpr_create_github</span>(<span class='no'>package_name</span>, <span class='no'>post_text</span>, <span class='kw'>public</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,12 +131,8 @@
       <td><p>is the name of the created data R package.</p></td>
     </tr>
     <tr>
-      <th>folder_dir</th>
-      <td><p>is the folder on your local computer where you store your git repository</p></td>
-    </tr>
-    <tr>
-      <th>github_user</th>
-      <td><p>is the Github group or user where the package is stored.</p></td>
+      <th>post_text</th>
+      <td><p>is the api info for the POST command '/orgs/ORGNAME/repos' or '/USER/repos'</p></td>
     </tr>
     </table>
 

@@ -25,8 +25,10 @@ dpr_document  <-  function(data_object, extension = "md", export_folder = "R", o
                                                    day_year = "The numbered day of the year"),
                            append = TRUE, details = TRUE) {
 
+    class_one <- function(x) { x %>% class %>% str_c(collapse = ",")}
+
     names_types <- data_object %>%
-        dplyr::summarise_all(class) %>%
+        dplyr::summarise_all(class_one) %>%
         tidyr::pivot_longer(cols = 1:ncol(data_object), names_to = "variable", values_to = "class")
 
   names_description <- dplyr::bind_rows(var_details) %>%

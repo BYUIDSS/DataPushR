@@ -1,5 +1,5 @@
 #'	@title Export csv files to other file formats as defined
-#' 	@param object is a character string of the csv file (with its path) or an R data.frame.
+#' 	@param object is a character string of the csv file or an R data.frame.
 #'	@param export_format is a character vector of formats to convert.  Defaults to ".rds".  Potential file types are .xlsx, .rds, .sav, .dta, .sas7bdat, and .json
 #'	@param export_folder is the folder where the exported data will be placed.  In this folder the a subfolder will be created for each csv file name and
 #'  selected export_format file types will be created in the folder.

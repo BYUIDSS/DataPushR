@@ -3,7 +3,7 @@
 \name{dpr_export}
 \alias{dpr_export}
 \title{Export csv files to other file formats as defined
-	@param object is a character string of the csv file (with its path) or an R data.frame.}
+	@param object is a character string of the csv file or an R data.frame.}
 \usage{
 dpr_export(
   object = NULL,
@@ -25,7 +25,7 @@ selected export_format file types will be created in the folder.}
 }
 \description{
 Export csv files to other file formats as defined
-	@param object is a character string of the csv file (with its path) or an R data.frame.
+	@param object is a character string of the csv file or an R data.frame.
 }
 \examples{
 dd <- read_csv(system.file("extdata", "Draft_vietnam.csv", package = "DataPushR"))
